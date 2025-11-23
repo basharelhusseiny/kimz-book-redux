@@ -3,9 +3,10 @@ import type { book } from "../store/bookSlice";
 interface Props {
   isLoading: boolean;
   books: book[];
+  isLoggedIn: boolean;
 }
 
-const BookList = ({ isLoading, books }: Props) => {
+const BookList = ({ isLoading, books, isLoggedIn }: Props) => {
   if (isLoading)
     return (
       <div className="flex-1 border-r-2 border-gray-300 p-4">Loading....</div>
@@ -30,7 +31,10 @@ const BookList = ({ isLoading, books }: Props) => {
                 <button className="px-3 py-0.5 text-center bg-sky-500 hover:bg-sky-600 text-white rounded-md cursor-pointer">
                   Read
                 </button>
-                <button className="px-3 py-0.5 text-center bg-red-500 hover:bg-red-600 text-white rounded-md cursor-pointer">
+                <button
+                  disabled={!isLoggedIn}
+                  className="disabled:bg-red-300 disabled:cursor-not-allowed px-3 py-0.5 text-center bg-red-500 hover:bg-red-600 text-white rounded-md cursor-pointer"
+                >
                   Delete
                 </button>
               </div>
